@@ -1,39 +1,79 @@
-const colors = [
-  '#FFFFFF',
-  '#2196F3',
-  '#4CAF50',
-  '#FF9800',
-  '#009688',
-  '#795548',
-];
+// const promise = new Promise((resolve, reject) => {
+//     const success = Math.random() > 0.5;
 
-let startBtn = document.querySelector('[data-action = "start"]');
-let stopBtn = document.querySelector('[data-action = "stop"]');
+//     setTimeout(() => {
+//         if (success) {
+//             resolve('Cheers')
+//         }
 
+//         reject('bad')
+//     },1000)
+// })
 
+// promise.then(result => console.log(result)).catch(result => console.log(result))
 
+// const fetchUser = userName => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       const success = Math.random() > 0.3;
 
-startBtn.addEventListener('click', startBtnHandler);
-stopBtn.addEventListener('click', stopBtnHadler);
+//       if (success) {
+//         const user = { name: userName, age: 26, posts: 74 };
+//         resolve(user);
+//       }
 
-function randomColor() {
-    return colors[Math.floor(Math.random() * colors.length)];
-}
+//       const error = 'Произошла ошибка :(';
+//       reject(error);
+//     }, 1000);
+//   });
+// };
 
-function setRandomColor() {
-    document.body.style.backgroundColor = randomColor();
-}
+// fetchUser('Mango').then(onFetchUserSuccess).catch(onFetchUserError);
 
-let interval;
+// function onFetchUserSuccess(user) {
+//   console.log(user);
+// }
 
-function startBtnHandler() {    
-    interval = setInterval(() => setRandomColor(), 1000); 
-    startBtn.disabled = true;
-}
+// function onFetchUserError(error) {
+//   console.log(`%c ${error}`, 'color: red; font-size: 16px;');
+// }
 
-function stopBtnHadler() {
-    clearInterval(interval);
-    startBtn.disabled = false;
-}
+// const makePromise = delay => {
+//   return new Promise(resolve => {
+//     setTimeout(() => {
+//       resolve(delay);
+//     }, delay);
+//   });
+// };
 
+// makePromise(4000).then(console.log);
 
+// makePromise(2000).then(console.log);
+
+// makePromise(5000).then(console.log);
+// const promise = new Promise(resolve => resolve(5));
+
+// promise.then(x => { return 'x: ', x }).then(y => console.log('y: ', y));
+
+// const log = value => console.log(value);
+
+// const add = (a, b, callback) => callback(a + b);
+
+// add(5,10,log)
+
+// Напиши функцию delay(ms), которая возвращает промис, переходящий в состояние "resolved" через ms миллисекунд. Значением исполнившегося промиса должно быть то кол-во миллисекунд которое передали во время вызова функции delay.
+
+const delay = ms => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(ms);
+    }, ms);
+  });
+};
+
+const logger = time => console.log(`Resolved after ${time} ms`);
+
+// Вызовы функции для проверки
+delay(2000).then(logger); // Resolved after 2000ms
+delay(1000).then(logger); // Resolved after 1000ms
+delay(1500).then(logger); // Resolved after 1500ms
